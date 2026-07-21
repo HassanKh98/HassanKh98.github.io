@@ -1,11 +1,132 @@
-My Portfolio
-  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Mechatronics & Intelligent Control</title>
+</head>
+<body>
 
+    <!-- ==========================================
+         4. THE ESSENTIALS (About & Contact)
+         ========================================== -->
+    <header>
+        <h1>[Your Name]</h1>
+        <h2>Master's-Level Engineer | Mechatronics & Control Systems</h2>
+        
+        <section id="about-me">
+            <h3>About Me</h3>
+            <p>
+                I am a mechatronics engineer specializing in robotics, UAV path planning, intelligent control, reinforcement learning, and mathematical modeling. I build bridges between hardware and sophisticated control algorithms.
+            </p>
+        </section>
 
-  Hello, I'm [Your Name]
-  Software Developer | Designer | Problem Solver
-  Welcome to my online portfolio. I'm currently building this site!
-  
-  Projects
-  
-    Project 1: Coming soon.
+        <nav id="contact-links">
+            <ul>
+                <li><a href="mailto:your.email@example.com">Email Me</a></li>
+                <li><a href="link-to-your-linkedin">LinkedIn</a></li>
+                <li><a href="link-to-your-resume.pdf" target="_blank">Download Resume (PDF)</a></li>
+                <li><a href="https://github.com/yourusername">GitHub</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        <!-- ==========================================
+             1. CATEGORIZED PROJECTS & 3. CASE STUDIES
+             ========================================== -->
+        
+        <!-- Category: Simulation & Modeling -->
+        <section id="simulation-modeling">
+            <h2>Simulation & Mathematical Modeling</h2>
+            
+            <article class="case-study">
+                <h3>Robotic Arm Kinematics & Double Pendulum Simulation</h3>
+                <p><strong>Objective:</strong> Develop accurate physical simulations for robotic systems.</p>
+                <p><strong>Architecture:</strong> Python, SymPy for mathematical modeling.</p>
+                <p><strong>Overview:</strong> Built a simulation framework to model complex kinematics, providing a foundation for advanced path planning and control.</p>
+                <p><strong>Results:</strong> [Insert key metric or outcome here]</p>
+            </article>
+
+            <article class="case-study">
+                <h3>Thermal Control Models</h3>
+                <p><strong>Objective:</strong> Maintain stable temperature environments using predictive modeling.</p>
+                <p><strong>Architecture:</strong> PID control, Model Predictive Control (MPC).</p>
+                <p><strong>Overview:</strong> Developed comprehensive models to govern thermal dynamics, optimizing for rapid response and minimal overshoot.</p>
+            </article>
+
+            <article class="case-study">
+                <h3>Yeoh Hyperelastic Material Parameter Identification</h3>
+                <p><strong>Objective:</strong> Validate material parameters using numerical simulation.</p>
+                <p><strong>Architecture:</strong> ANSYS, synthetic multiaxial stress-strain datasets.</p>
+                <p><strong>Overview:</strong> Generated synthetic datasets to fit and validate parameters for the Yeoh hyperelastic model, confirming the numerical stability of the material properties.</p>
+            </article>
+        </section>
+
+        <hr>
+
+        <!-- Category: Machine Learning & Data Science -->
+        <section id="machine-learning">
+            <h2>Machine Learning & Data Science</h2>
+
+            <article class="case-study">
+                <h3>ECG Signal Reconstruction & Classification</h3>
+                <p><strong>Objective:</strong> Reconstruct electrocardiogram signals and perform multi-label classification.</p>
+                <p><strong>Architecture:</strong> PyTorch, 1D CNNs, BiLSTM, PTB-XL dataset.</p>
+                <p><strong>Overview:</strong> Engineered sequential deep learning models to process medical time-series data, specifically focusing on noise reduction and feature extraction.</p>
+                <p><strong>Results:</strong> [Insert accuracy or loss metrics here]</p>
+            </article>
+
+            <article class="case-study">
+                <h3>Temporal Feature Extraction & Clustering</h3>
+                <p><strong>Objective:</strong> Identify patterns in complex medical datasets without predefined labels.</p>
+                <p><strong>Architecture:</strong> Python, pandas, scikit-learn, K-Means, HDBSCAN.</p>
+                <p><strong>Overview:</strong> Built a data processing pipeline to clean time-related features from a blood cancer dataset and automatically determine optimal cluster counts.</p>
+            </article>
+        </section>
+
+        <hr>
+
+        <!-- Category: Embedded Systems & Hardware -->
+        <section id="embedded-systems">
+            <h2>Embedded Systems & Hardware</h2>
+
+            <article class="case-study">
+                <h3>Microcontroller Prototyping</h3>
+                <p><strong>Objective:</strong> Develop and debug firmware for IoT and edge devices.</p>
+                <p><strong>Architecture:</strong> ESP32, ESP8266, Raspberry Pi Pico, MicroPython, Thonny IDE.</p>
+                <p><strong>Overview:</strong> Flashed and configured various microcontrollers for embedded applications, handling sensor integration and hardware-level debugging.</p>
+            </article>
+        </section>
+
+        <hr>
+
+        <!-- Category: Software Development -->
+        <section id="software-development">
+            <h2>Software Development</h2>
+
+            <article class="case-study">
+                <h3>Remote AI Command Gateway</h3>
+                <p><strong>Objective:</strong> Execute remote AI commands securely via mobile.</p>
+                <p><strong>Architecture:</strong> OpenClaw agent, Telegram Bot API, Gemini API.</p>
+                <p><strong>Overview:</strong> Deployed and troubleshot a local network gateway pairing a personal Telegram bot with LLM capabilities for remote task execution.</p>
+            </article>
+
+            <article class="case-study">
+                <h3>Offline Cash Transaction Tracker</h3>
+                <p><strong>Objective:</strong> Create a private, serverless tool for financial tracking.</p>
+                <p><strong>Architecture:</strong> Single-file HTML/JS/CSS, LocalStorage, CSV parsing.</p>
+                <p><strong>Overview:</strong> Built a lightweight web application that persists data locally in the browser and visualizes spending via custom CSS-based donut charts.</p>
+            </article>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 [Your Name]. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
