@@ -123,19 +123,6 @@
             pointer-events: none; /* Let clicks pass to canvas */
         }
 
-        .hero-badge {
-            display: inline-block;
-            font-family: 'Fira Code', monospace;
-            color: var(--accent);
-            background: rgba(0, 240, 255, 0.1);
-            border: 1px solid var(--accent);
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin-bottom: 1.5rem;
-            animation: fadeInDown 0.8s ease;
-        }
-
         .hero h1 {
             font-size: 4.5rem;
             line-height: 1.1;
@@ -401,18 +388,17 @@
 <body>
 
     <nav>
-        <div class="nav-logo">SYS<span>.CTRL</span></div>
+        <div class="nav-logo">HASAN<span>.MSc</span></div>
         <ul class="nav-links">
-            <li><a href="#about">01. About</a></li>
-            <li><a href="#projects">02. Hardware & Systems</a></li>
-            <li><a href="#contact">03. Interface</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Hardware & Systems</a></li>
+            <li><a href="#contact">Interface</a></li>
         </ul>
     </nav>
 
     <section class="hero" id="about">
         <canvas id="kinematics-canvas"></canvas>
         <div class="hero-content">
-            <div class="hero-badge">System Status: Online</div>
             <h1>Hasan Al-Asa'd, MSc</h1>
             <h2>Mechanical & Mechatronics Engineer</h2>
             <p>
@@ -420,8 +406,8 @@
                 Bridging the gap between software intelligence and physical hardware through rapid prototyping, 3D printing, circuit wiring, and AI systems development.
             </p>
             <div class="cta-buttons">
-                <a href="#projects" class="btn btn-primary">Initialize.Projects()</a>
-                <a href="resume.pdf" class="btn btn-outline" target="_blank">Download.PDF</a>
+                <a href="#projects" class="btn btn-primary">View Portfolio</a>
+                <a href="Hasan Resume.pdf" class="btn btn-outline" target="_blank">Download Resume</a>
             </div>
         </div>
     </section>
@@ -566,17 +552,17 @@
     </section>
 
     <footer id="contact">
-        <h2 style="font-size: 2rem; margin-bottom: 1rem;">Establish Connection</h2>
+        <h2 style="font-size: 2rem; margin-bottom: 1rem;">Let's Connect</h2>
         <p style="color: var(--text-muted); margin-bottom: 2rem;">Currently based in Irbid, Jordan. Open for opportunities in robotics, AI, and mechatronics engineering.</p>
         
         <div class="social-links">
-            <a href="mailto:Hkalasad98@gmail.com" class="btn btn-outline">Send_Email()</a>
-            <a href="https://linkedin.com" class="btn btn-outline" target="_blank">LinkedIn()</a>
-            <a href="https://github.com" class="btn btn-outline" target="_blank">GitHub()</a>
+            <a href="mailto:Hkalasad98@gmail.com" class="btn btn-outline">Email Me</a>
+            <a href="https://linkedin.com" class="btn btn-outline" target="_blank">LinkedIn</a>
+            <a href="https://github.com" class="btn btn-outline" target="_blank">GitHub</a>
         </div>
         
         <p style="font-family: 'Fira Code', monospace; font-size: 0.8rem; color: #484f58; margin-top: 4rem;">
-            SYS.STATUS: NOMINAL | &copy; 2026 Hasan Al-Asa'd
+            &copy; 2026 Hasan Al-Asa'd
         </p>
     </footer>
 
@@ -605,13 +591,13 @@
         
         window.addEventListener('mousemove', (e) => {
             mouse.x = e.clientX;
-            mouse.y = e.clientY;
+            mouse.y = e.clientY + window.scrollY; // Added scroll offset
         });
 
         // Touch support for mobile
         window.addEventListener('touchmove', (e) => {
             mouse.x = e.touches[0].clientX;
-            mouse.y = e.touches[0].clientY;
+            mouse.y = e.touches[0].clientY + window.scrollY; // Added scroll offset
         });
 
         resize();
