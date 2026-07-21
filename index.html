@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Mechatronics & Intelligent Control</title>
+    <title>Mechatronics Engineer | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables for Dark Theme */
         :root {
-            --bg-main: #0f172a;
-            --bg-card: #1e293b;
-            --bg-nav: rgba(15, 23, 42, 0.9);
-            --accent: #0ea5e9;
-            --accent-hover: #38bdf8;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border: #334155;
-            --transition: all 0.3s ease;
+            --bg-main: #0a0f16;
+            --bg-card: #111823;
+            --bg-nav: rgba(10, 15, 22, 0.85);
+            --accent: #00f0ff; /* Tech Cyan */
+            --accent-glow: rgba(0, 240, 255, 0.4);
+            --accent-secondary: #ff0055; /* Laser Red */
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --border: #30363d;
+            --grid-color: rgba(255, 255, 255, 0.03);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        /* Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -27,10 +28,16 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-main);
             color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
+            /* Blueprint Grid Effect */
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 30px 30px;
         }
 
         a {
@@ -40,19 +47,19 @@
         }
 
         a:hover {
-            color: var(--accent-hover);
+            text-shadow: 0 0 8px var(--accent-glow);
         }
 
-        /* Navigation */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
             background-color: var(--bg-nav);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
             z-index: 1000;
-            padding: 1rem 5%;
+            padding: 1.2rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -61,206 +68,269 @@
         .nav-logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--text-main);
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .nav-logo span {
             color: var(--accent);
+            font-family: 'Fira Code', monospace;
+            font-weight: 500;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             list-style: none;
         }
 
         .nav-links a {
             color: var(--text-muted);
-            font-weight: 500;
+            font-size: 0.9rem;
+            font-family: 'Fira Code', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .nav-links a:hover {
             color: var(--accent);
         }
 
-        /* Hero Section */
         .hero {
+            position: relative;
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+            align-items: flex-start;
+            padding: 0 10%;
+            overflow: hidden;
+        }
+
+        #kinematics-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        .hero-content {
+            z-index: 1;
+            max-width: 800px;
+            pointer-events: none; /* Let clicks pass to canvas */
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-family: 'Fira Code', monospace;
+            color: var(--accent);
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--accent);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 0.8s ease;
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: 4.5rem;
+            line-height: 1.1;
             margin-bottom: 1rem;
-            animation: fadeInDown 1s ease;
+            font-weight: 700;
+            animation: fadeInDown 1s ease 0.2s both;
         }
 
         .hero h2 {
-            font-size: 1.5rem;
+            font-size: 2rem;
             color: var(--text-muted);
             margin-bottom: 2rem;
-            font-weight: 400;
-            animation: fadeInUp 1s ease 0.5s both;
+            font-weight: 300;
+            animation: fadeInUp 1s ease 0.4s both;
         }
 
         .hero p {
-            max-width: 600px;
             font-size: 1.1rem;
             color: var(--text-muted);
             margin-bottom: 2.5rem;
-            animation: fadeInUp 1s ease 0.7s both;
+            max-width: 600px;
+            animation: fadeInUp 1s ease 0.6s both;
         }
 
         .cta-buttons {
             display: flex;
-            gap: 1rem;
-            animation: fadeInUp 1s ease 0.9s both;
+            gap: 1.5rem;
+            pointer-events: auto;
+            animation: fadeInUp 1s ease 0.8s both;
         }
 
         .btn {
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
             font-weight: 600;
+            font-family: 'Fira Code', monospace;
             cursor: pointer;
             border: none;
             transition: var(--transition);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .btn-primary {
             background-color: var(--accent);
-            color: white;
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
         }
 
         .btn-primary:hover {
-            background-color: var(--accent-hover);
-            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.6);
             transform: translateY(-2px);
         }
 
         .btn-outline {
             background-color: transparent;
-            color: var(--accent);
-            border: 2px solid var(--accent);
+            color: var(--text-main);
+            border: 1px solid var(--border);
         }
 
         .btn-outline:hover {
-            background-color: rgba(14, 165, 233, 0.1);
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(0, 240, 255, 0.05);
             transform: translateY(-2px);
         }
 
-        /* Filter System */
+        .projects {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            height: 1px;
+            flex-grow: 1;
+            background: linear-gradient(90deg, var(--border), transparent);
+        }
+
         .filter-container {
             display: flex;
-            justify-content: center;
             gap: 1rem;
-            margin: 4rem 0 2rem 0;
             flex-wrap: wrap;
-            padding: 0 20px;
+            margin-bottom: 3rem;
         }
 
         .filter-btn {
             background: var(--bg-card);
             color: var(--text-muted);
             border: 1px solid var(--border);
-            padding: 0.5rem 1.2rem;
-            border-radius: 20px;
+            padding: 0.6rem 1.5rem;
+            border-radius: 4px;
             cursor: pointer;
             transition: var(--transition);
-            font-weight: 500;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
         }
 
         .filter-btn.active, .filter-btn:hover {
-            background: var(--accent);
-            color: white;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--accent);
             border-color: var(--accent);
-        }
-
-        /* Projects Section */
-        .projects {
-            padding: 5rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-muted);
-            margin-bottom: 3rem;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2.5rem;
         }
 
         .card {
             background-color: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
             transition: var(--transition);
             display: flex;
             flex-direction: column;
             position: relative;
-            top: 0;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
         }
 
         .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
-            border-color: var(--accent);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            border-color: #4b5563;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
         }
 
         .card-img-container {
-            position: relative;
+            height: 220px;
             width: 100%;
-            height: 200px;
             overflow: hidden;
+            position: relative;
+            background: #000;
         }
 
         .card-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            opacity: 0.7;
+            transition: opacity 0.4s ease, transform 0.6s ease;
         }
 
         .card:hover .card-img {
+            opacity: 1;
             transform: scale(1.05);
         }
 
         .card-content {
-            padding: 1.5rem;
+            padding: 2rem;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
         }
 
         .category-tag {
+            font-family: 'Fira Code', monospace;
             font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent);
-            font-weight: 700;
-            margin-bottom: 0.5rem;
+            color: var(--accent-secondary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .card h3 {
-            font-size: 1.25rem;
+            font-size: 1.4rem;
             margin-bottom: 1rem;
             color: var(--text-main);
         }
@@ -276,229 +346,200 @@
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .tech-stack span {
-            background-color: rgba(255,255,255,0.05);
-            padding: 0.2rem 0.6rem;
+            background-color: rgba(255,255,255,0.03);
+            padding: 0.3rem 0.8rem;
             border-radius: 4px;
-            font-size: 0.8rem;
-            color: #cbd5e1;
-            border: 1px solid rgba(255,255,255,0.1);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            color: #c9d1d9;
+            border: 1px solid var(--border);
         }
 
         .card-footer {
             border-top: 1px solid var(--border);
-            padding-top: 1rem;
+            padding-top: 1.5rem;
             display: flex;
             justify-content: space-between;
-            align-items: center;
         }
 
-        .view-btn {
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .view-btn::after {
-            content: '→';
-            transition: transform 0.3s ease;
-        }
-
-        .view-btn:hover::after {
-            transform: translateX(4px);
-        }
-
-        /* Footer */
         footer {
-            background-color: #0b1120;
-            text-align: center;
-            padding: 2rem;
             border-top: 1px solid var(--border);
-            color: var(--text-muted);
+            padding: 4rem 5%;
+            text-align: center;
+            background: #05080c;
         }
 
-        /* Animations */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
+            from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .nav-links { display: none; } /* Simplified for demo */
+            .hero h1 { font-size: 3rem; }
+            .hero h2 { font-size: 1.5rem; }
+            .nav-links { display: none; }
+            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
     <nav>
-        <div class="nav-logo">Port<span>folio.</span></div>
+        <div class="nav-logo">SYS<span>.CTRL</span></div>
         <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#about">01. About</a></li>
+            <li><a href="#projects">02. Hardware & Systems</a></li>
+            <li><a href="#contact">03. Interface</a></li>
         </ul>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero" id="about">
-        <h1>Hello, I'm <span style="color: var(--accent);">[Your Name]</span></h1>
-        <h2>Master's-Level Engineer | Mechatronics & Control Systems</h2>
-        <p>
-            I specialize in robotics, UAV path planning, intelligent control, and mathematical modeling. 
-            I build bridges between physical hardware and sophisticated algorithms.
-        </p>
-        <div class="cta-buttons">
-            <a href="#projects" class="btn btn-primary">View My Work</a>
-            <a href="link-to-your-resume.pdf" class="btn btn-outline" target="_blank">Download Resume</a>
+        <canvas id="kinematics-canvas"></canvas>
+        <div class="hero-content">
+            <div class="hero-badge">System Status: Online</div>
+            <h1>[Your Name]</h1>
+            <h2>Mechatronics & Control Engineer</h2>
+            <p>
+                Bridging the gap between software intelligence and physical hardware. 
+                Specializing in robotics, control theory, PCB design, and intelligent automation systems.
+            </p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">Initialize.Projects()</a>
+                <a href="resume.pdf" class="btn btn-outline" target="_blank">Download.PDF</a>
+            </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
     <section class="projects" id="projects">
-        <h2 class="section-title">Featured Projects</h2>
-        <p class="section-subtitle">A selection of my engineering, ML, and software developments</p>
-
-        <!-- Filters -->
-        <div class="filter-container">
-            <button class="filter-btn active" data-filter="all">All Projects</button>
-            <button class="filter-btn" data-filter="simulation">Simulation & Control</button>
-            <button class="filter-btn" data-filter="ml">Machine Learning</button>
-            <button class="filter-btn" data-filter="embedded">Embedded Systems</button>
-            <button class="filter-btn" data-filter="software">Software</button>
+        <div class="section-header">
+            <h2 class="section-title">Engineering Portfolio</h2>
         </div>
 
-        <!-- Project Grid -->
-        <div class="grid">
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">All Systems</button>
+            <button class="filter-btn" data-filter="robotics">Robotics & ROS</button>
+            <button class="filter-btn" data-filter="embedded">Embedded & PCB</button>
+            <button class="filter-btn" data-filter="control">Control & Simulation</button>
+            <button class="filter-btn" data-filter="ml">Machine Learning</button>
+        </div>
 
-            <!-- Card 1: Simulation -->
-            <article class="card" data-category="simulation">
+        <div class="grid">
+            <!-- Robotics -->
+            <article class="card" data-category="robotics">
                 <div class="card-img-container">
-                    <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80" alt="Robotics" class="card-img">
+                    <!-- Placeholder: Replace with actual robot photo -->
+                    <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80" alt="Robotic Arm" class="card-img">
                 </div>
                 <div class="card-content">
-                    <span class="category-tag">Simulation & Modeling</span>
-                    <h3>Robotic Arm Kinematics & Pendulum</h3>
-                    <p>Built a simulation framework to model complex kinematics, providing a foundation for advanced path planning and intelligent control.</p>
+                    <span class="category-tag">ROBOTICS_&_KINEMATICS</span>
+                    <h3>6-DOF Robotic Manipulator</h3>
+                    <p>Designed and programmed a custom 6-axis robotic arm. Implemented forward/inverse kinematics and trajectory planning using ROS2 and MoveIt.</p>
                     <div class="tech-stack">
-                        <span>Python</span>
-                        <span>SymPy</span>
+                        <span>ROS2</span>
+                        <span>C++</span>
+                        <span>SolidWorks</span>
+                        <span>MoveIt</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="view-btn">View Repository</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Embedded -->
+            <article class="card" data-category="embedded">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="PCB Board" class="card-img">
+                </div>
+                <div class="card-content">
+                    <span class="category-tag">EMBEDDED_HARDWARE</span>
+                    <h3>Custom Flight Controller PCB</h3>
+                    <p>Engineered a 4-layer PCB integrating an STM32 MCU, IMU, and power distribution for a custom quadcopter. Programmed low-level I2C/SPI drivers.</p>
+                    <div class="tech-stack">
+                        <span>Altium Designer</span>
+                        <span>STM32</span>
+                        <span>FreeRTOS</span>
+                        <span>C</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="view-btn">View Schematics</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Control Systems -->
+            <article class="card" data-category="control">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?auto=format&fit=crop&w=800&q=80" alt="Control Simulation" class="card-img">
+                </div>
+                <div class="card-content">
+                    <span class="category-tag">CONTROL_THEORY</span>
+                    <h3>Active Suspension MPC</h3>
+                    <p>Developed a Model Predictive Control (MPC) algorithm for an active vehicle suspension system to optimize ride comfort and road handling constraints.</p>
+                    <div class="tech-stack">
+                        <span>MATLAB</span>
+                        <span>Simulink</span>
                         <span>Control Theory</span>
                     </div>
                     <div class="card-footer">
-                        <a href="#" class="view-btn">Read Case Study</a>
+                        <a href="#" class="view-btn">View Simulation</a>
                     </div>
                 </div>
             </article>
 
-            <!-- Card 2: ML -->
+            <!-- Machine Learning -->
             <article class="card" data-category="ml">
                 <div class="card-img-container">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Data Science" class="card-img">
+                    <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=800&q=80" alt="Machine Vision" class="card-img">
                 </div>
                 <div class="card-content">
-                    <span class="category-tag">Machine Learning</span>
-                    <h3>ECG Signal Reconstruction</h3>
-                    <p>Engineered sequential deep learning models to process medical time-series data, focusing on noise reduction and multi-label classification.</p>
-                    <div class="tech-stack">
-                        <span>PyTorch</span>
-                        <span>1D CNNs</span>
-                        <span>BiLSTM</span>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="view-btn">Read Case Study</a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Card 3: Embedded -->
-            <article class="card" data-category="embedded">
-                <div class="card-img-container">
-                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Hardware" class="card-img">
-                </div>
-                <div class="card-content">
-                    <span class="category-tag">Embedded Systems</span>
-                    <h3>Microcontroller Prototyping</h3>
-                    <p>Flashed and configured various microcontrollers for embedded applications, handling sensor integration and hardware-level debugging.</p>
-                    <div class="tech-stack">
-                        <span>ESP32</span>
-                        <span>Raspberry Pi Pico</span>
-                        <span>MicroPython</span>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="view-btn">Read Case Study</a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Card 4: Simulation -->
-            <article class="card" data-category="simulation">
-                <div class="card-img-container">
-                    <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=800&q=80" alt="Thermal Engineering" class="card-img">
-                </div>
-                <div class="card-content">
-                    <span class="category-tag">Simulation & Modeling</span>
-                    <h3>Thermal Control Models</h3>
-                    <p>Developed comprehensive models to govern thermal dynamics, optimizing for rapid response and minimal overshoot in physical environments.</p>
-                    <div class="tech-stack">
-                        <span>PID Control</span>
-                        <span>MPC</span>
-                        <span>Simulink</span>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="view-btn">Read Case Study</a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Card 5: Software -->
-            <article class="card" data-category="software">
-                <div class="card-img-container">
-                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80" alt="Software Code" class="card-img">
-                </div>
-                <div class="card-content">
-                    <span class="category-tag">Software Development</span>
-                    <h3>Remote AI Command Gateway</h3>
-                    <p>Deployed a local network gateway pairing a personal Telegram bot with LLM capabilities for secure, remote task execution.</p>
+                    <span class="category-tag">AI_&_VISION</span>
+                    <h3>Automated Defect Detection</h3>
+                    <p>Deployed a real-time computer vision pipeline onto an edge device (Jetson Nano) to identify manufacturing defects on a moving conveyor belt.</p>
                     <div class="tech-stack">
                         <span>Python</span>
-                        <span>Telegram API</span>
-                        <span>Gemini API</span>
+                        <span>OpenCV</span>
+                        <span>PyTorch</span>
+                        <span>Edge AI</span>
                     </div>
                     <div class="card-footer">
-                        <a href="#" class="view-btn">Read Case Study</a>
+                        <a href="#" class="view-btn">View Case Study</a>
                     </div>
                 </div>
             </article>
-
-            <!-- Card 6: ML -->
-            <article class="card" data-category="ml">
+            
+            <!-- Control Systems 2 -->
+            <article class="card" data-category="control">
                 <div class="card-img-container">
-                    <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=800&q=80" alt="Clustering" class="card-img">
+                    <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=800&q=80" alt="Thermodynamics" class="card-img">
                 </div>
                 <div class="card-content">
-                    <span class="category-tag">Machine Learning</span>
-                    <h3>Temporal Feature Clustering</h3>
-                    <p>Built a data pipeline to clean time-related features from a medical dataset and automatically determine optimal cluster counts.</p>
+                    <span class="category-tag">SIMULATION_&_FEA</span>
+                    <h3>Hyperelastic Material Validation</h3>
+                    <p>Validated material parameters using numerical simulation. Generated synthetic datasets to fit parameters for the Yeoh hyperelastic model.</p>
                     <div class="tech-stack">
-                        <span>pandas</span>
-                        <span>scikit-learn</span>
-                        <span>HDBSCAN</span>
+                        <span>ANSYS</span>
+                        <span>Python</span>
+                        <span>FEA</span>
                     </div>
                     <div class="card-footer">
-                        <a href="#" class="view-btn">Read Case Study</a>
+                        <a href="#" class="view-btn">View Data</a>
                     </div>
                 </div>
             </article>
@@ -506,48 +547,144 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer id="contact">
-        <h2 style="margin-bottom: 1rem; color: var(--text-main);">Let's Connect</h2>
-        <p style="margin-bottom: 2rem;">I'm currently open for new opportunities and collaborations.</p>
-        <div style="display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2rem;">
-            <a href="mailto:your.email@example.com" class="btn btn-outline">Email Me</a>
-            <a href="https://linkedin.com/in/yourprofile" class="btn btn-outline" target="_blank">LinkedIn</a>
-            <a href="https://github.com/yourusername" class="btn btn-outline" target="_blank">GitHub</a>
+        <h2 style="font-size: 2rem; margin-bottom: 1rem;">Establish Connection</h2>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">Currently seeking opportunities in robotics and control systems engineering.</p>
+        
+        <div class="social-links">
+            <a href="mailto:your@email.com" class="btn btn-outline">Send_Email()</a>
+            <a href="https://linkedin.com" class="btn btn-outline" target="_blank">LinkedIn()</a>
+            <a href="https://github.com" class="btn btn-outline" target="_blank">GitHub()</a>
         </div>
-        <p>&copy; 2026 [Your Name]. All rights reserved.</p>
+        
+        <p style="font-family: 'Fira Code', monospace; font-size: 0.8rem; color: #484f58; margin-top: 4rem;">
+            SYS.STATUS: NOMINAL | &copy; 2026 [Your Name]
+        </p>
     </footer>
 
-    <!-- Interactivity Script -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            const cards = document.querySelectorAll('.card');
+        const canvas = document.getElementById('kinematics-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+        
+        // Configuration for the "robotic arm/tentacle"
+        const numSegments = 12;
+        const segmentLength = 35;
+        const segments = [];
 
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    // Update active button
-                    filterBtns.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            // Initialize segments origin at the bottom left
+            for(let i = 0; i < numSegments; i++) {
+                segments[i] = { x: width * 0.2, y: height };
+            }
+        }
 
-                    // Filter logic
-                    const filterValue = btn.getAttribute('data-filter');
-                    
-                    cards.forEach(card => {
-                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                            card.style.display = 'flex';
-                            setTimeout(() => {
-                                card.style.opacity = '1';
-                                card.style.transform = 'scale(1)';
-                            }, 50);
-                        } else {
-                            card.style.opacity = '0';
-                            card.style.transform = 'scale(0.9)';
-                            setTimeout(() => {
-                                card.style.display = 'none';
-                            }, 300); // match transition duration
-                        }
-                    });
+        window.addEventListener('resize', resize);
+        
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        // Touch support for mobile
+        window.addEventListener('touchmove', (e) => {
+            mouse.x = e.touches[0].clientX;
+            mouse.y = e.touches[0].clientY;
+        });
+
+        resize();
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Target the mouse with the first segment (end effector)
+            segments[0].x += (mouse.x - segments[0].x) * 0.1;
+            segments[0].y += (mouse.y - segments[0].y) * 0.1;
+
+            // Inverse Kinematics: pulling the rest of the chain
+            for (let i = 1; i < numSegments; i++) {
+                let dx = segments[i-1].x - segments[i].x;
+                let dy = segments[i-1].y - segments[i].y;
+                let angle = Math.atan2(dy, dx);
+                
+                // Maintain fixed segment length
+                segments[i].x = segments[i-1].x - Math.cos(angle) * segmentLength;
+                segments[i].y = segments[i-1].y - Math.sin(angle) * segmentLength;
+            }
+
+            // Anchor the base (last segment) to a fixed point if desired, 
+            // but letting it float feels more fluid for a background.
+            // If you want it anchored to bottom left:
+            // segments[numSegments-1].x = width * 0.1;
+            // segments[numSegments-1].y = height;
+            // Then forward reach back up... (omitted for floating "snake" effect which looks cooler)
+
+            // Draw the links (metal arms)
+            ctx.beginPath();
+            ctx.moveTo(segments[0].x, segments[0].y);
+            for (let i = 1; i < numSegments; i++) {
+                ctx.lineTo(segments[i].x, segments[i].y);
+            }
+            ctx.strokeStyle = 'rgba(48, 54, 61, 0.5)'; // Dark grey links
+            ctx.lineWidth = 12;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.stroke();
+
+            // Draw the inner wire
+            ctx.beginPath();
+            ctx.moveTo(segments[0].x, segments[0].y);
+            for (let i = 1; i < numSegments; i++) {
+                ctx.lineTo(segments[i].x, segments[i].y);
+            }
+            ctx.strokeStyle = 'rgba(0, 240, 255, 0.3)'; // Cyan wire
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Draw the joints (motors/servos)
+            for (let i = 0; i < numSegments; i++) {
+                ctx.beginPath();
+                ctx.arc(segments[i].x, segments[i].y, i === 0 ? 8 : 6, 0, Math.PI * 2);
+                ctx.fillStyle = '#0a0f16';
+                ctx.fill();
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = i === 0 ? '#ff0055' : '#00f0ff'; // End effector is red
+                ctx.stroke();
+            }
+
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
+
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+                
+                cards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.style.display = 'flex';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0) scale(1)';
+                        }, 50);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px) scale(0.95)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
                 });
             });
         });
