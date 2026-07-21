@@ -4,129 +4,553 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio | Mechatronics & Intelligent Control</title>
+    <style>
+        /* CSS Variables for Dark Theme */
+        :root {
+            --bg-main: #0f172a;
+            --bg-card: #1e293b;
+            --bg-nav: rgba(15, 23, 42, 0.9);
+            --accent: #0ea5e9;
+            --accent-hover: #38bdf8;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --transition: all 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--accent-hover);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: var(--bg-nav);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: 1px;
+        }
+
+        .nav-logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-weight: 400;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        .hero p {
+            max-width: 600px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 1s ease 0.7s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 1s ease 0.9s both;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(14, 165, 233, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Filter System */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 4rem 0 2rem 0;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+
+        .filter-btn {
+            background: var(--bg-card);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            top: 0;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+            border-color: var(--accent);
+        }
+
+        .card-img-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .category-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-stack span {
+            background-color: rgba(255,255,255,0.05);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #cbd5e1;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .card-footer {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .view-btn {
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .view-btn::after {
+            content: '→';
+            transition: transform 0.3s ease;
+        }
+
+        .view-btn:hover::after {
+            transform: translateX(4px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0b1120;
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } /* Simplified for demo */
+        }
+    </style>
 </head>
 <body>
 
-    <!-- ==========================================
-         4. THE ESSENTIALS (About & Contact)
-         ========================================== -->
-    <header>
-        <h1>[Your Name]</h1>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-logo">Port<span>folio.</span></div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="about">
+        <h1>Hello, I'm <span style="color: var(--accent);">[Your Name]</span></h1>
         <h2>Master's-Level Engineer | Mechatronics & Control Systems</h2>
-        
-        <section id="about-me">
-            <h3>About Me</h3>
-            <p>
-                I am a mechatronics engineer specializing in robotics, UAV path planning, intelligent control, reinforcement learning, and mathematical modeling. I build bridges between hardware and sophisticated control algorithms.
-            </p>
-        </section>
+        <p>
+            I specialize in robotics, UAV path planning, intelligent control, and mathematical modeling. 
+            I build bridges between physical hardware and sophisticated algorithms.
+        </p>
+        <div class="cta-buttons">
+            <a href="#projects" class="btn btn-primary">View My Work</a>
+            <a href="link-to-your-resume.pdf" class="btn btn-outline" target="_blank">Download Resume</a>
+        </div>
+    </section>
 
-        <nav id="contact-links">
-            <ul>
-                <li><a href="mailto:your.email@example.com">Email Me</a></li>
-                <li><a href="link-to-your-linkedin">LinkedIn</a></li>
-                <li><a href="link-to-your-resume.pdf" target="_blank">Download Resume (PDF)</a></li>
-                <li><a href="https://github.com/yourusername">GitHub</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">A selection of my engineering, ML, and software developments</p>
 
-    <hr>
+        <!-- Filters -->
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="simulation">Simulation & Control</button>
+            <button class="filter-btn" data-filter="ml">Machine Learning</button>
+            <button class="filter-btn" data-filter="embedded">Embedded Systems</button>
+            <button class="filter-btn" data-filter="software">Software</button>
+        </div>
 
-    <main>
-        <!-- ==========================================
-             1. CATEGORIZED PROJECTS & 3. CASE STUDIES
-             ========================================== -->
-        
-        <!-- Category: Simulation & Modeling -->
-        <section id="simulation-modeling">
-            <h2>Simulation & Mathematical Modeling</h2>
-            
-            <article class="case-study">
-                <h3>Robotic Arm Kinematics & Double Pendulum Simulation</h3>
-                <p><strong>Objective:</strong> Develop accurate physical simulations for robotic systems.</p>
-                <p><strong>Architecture:</strong> Python, SymPy for mathematical modeling.</p>
-                <p><strong>Overview:</strong> Built a simulation framework to model complex kinematics, providing a foundation for advanced path planning and control.</p>
-                <p><strong>Results:</strong> [Insert key metric or outcome here]</p>
+        <!-- Project Grid -->
+        <div class="grid">
+
+            <!-- Card 1: Simulation -->
+            <article class="card" data-category="simulation">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80" alt="Robotics" class="card-img">
+                </div>
+                <div class="card-content">
+                    <span class="category-tag">Simulation & Modeling</span>
+                    <h3>Robotic Arm Kinematics & Pendulum</h3>
+                    <p>Built a simulation framework to model complex kinematics, providing a foundation for advanced path planning and intelligent control.</p>
+                    <div class="tech-stack">
+                        <span>Python</span>
+                        <span>SymPy</span>
+                        <span>Control Theory</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="view-btn">Read Case Study</a>
+                    </div>
+                </div>
             </article>
 
-            <article class="case-study">
-                <h3>Thermal Control Models</h3>
-                <p><strong>Objective:</strong> Maintain stable temperature environments using predictive modeling.</p>
-                <p><strong>Architecture:</strong> PID control, Model Predictive Control (MPC).</p>
-                <p><strong>Overview:</strong> Developed comprehensive models to govern thermal dynamics, optimizing for rapid response and minimal overshoot.</p>
+            <!-- Card 2: ML -->
+            <article class="card" data-category="ml">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Data Science" class="card-img">
+                </div>
+                <div class="card-content">
+                    <span class="category-tag">Machine Learning</span>
+                    <h3>ECG Signal Reconstruction</h3>
+                    <p>Engineered sequential deep learning models to process medical time-series data, focusing on noise reduction and multi-label classification.</p>
+                    <div class="tech-stack">
+                        <span>PyTorch</span>
+                        <span>1D CNNs</span>
+                        <span>BiLSTM</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="view-btn">Read Case Study</a>
+                    </div>
+                </div>
             </article>
 
-            <article class="case-study">
-                <h3>Yeoh Hyperelastic Material Parameter Identification</h3>
-                <p><strong>Objective:</strong> Validate material parameters using numerical simulation.</p>
-                <p><strong>Architecture:</strong> ANSYS, synthetic multiaxial stress-strain datasets.</p>
-                <p><strong>Overview:</strong> Generated synthetic datasets to fit and validate parameters for the Yeoh hyperelastic model, confirming the numerical stability of the material properties.</p>
-            </article>
-        </section>
-
-        <hr>
-
-        <!-- Category: Machine Learning & Data Science -->
-        <section id="machine-learning">
-            <h2>Machine Learning & Data Science</h2>
-
-            <article class="case-study">
-                <h3>ECG Signal Reconstruction & Classification</h3>
-                <p><strong>Objective:</strong> Reconstruct electrocardiogram signals and perform multi-label classification.</p>
-                <p><strong>Architecture:</strong> PyTorch, 1D CNNs, BiLSTM, PTB-XL dataset.</p>
-                <p><strong>Overview:</strong> Engineered sequential deep learning models to process medical time-series data, specifically focusing on noise reduction and feature extraction.</p>
-                <p><strong>Results:</strong> [Insert accuracy or loss metrics here]</p>
+            <!-- Card 3: Embedded -->
+            <article class="card" data-category="embedded">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Hardware" class="card-img">
+                </div>
+                <div class="card-content">
+                    <span class="category-tag">Embedded Systems</span>
+                    <h3>Microcontroller Prototyping</h3>
+                    <p>Flashed and configured various microcontrollers for embedded applications, handling sensor integration and hardware-level debugging.</p>
+                    <div class="tech-stack">
+                        <span>ESP32</span>
+                        <span>Raspberry Pi Pico</span>
+                        <span>MicroPython</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="view-btn">Read Case Study</a>
+                    </div>
+                </div>
             </article>
 
-            <article class="case-study">
-                <h3>Temporal Feature Extraction & Clustering</h3>
-                <p><strong>Objective:</strong> Identify patterns in complex medical datasets without predefined labels.</p>
-                <p><strong>Architecture:</strong> Python, pandas, scikit-learn, K-Means, HDBSCAN.</p>
-                <p><strong>Overview:</strong> Built a data processing pipeline to clean time-related features from a blood cancer dataset and automatically determine optimal cluster counts.</p>
-            </article>
-        </section>
-
-        <hr>
-
-        <!-- Category: Embedded Systems & Hardware -->
-        <section id="embedded-systems">
-            <h2>Embedded Systems & Hardware</h2>
-
-            <article class="case-study">
-                <h3>Microcontroller Prototyping</h3>
-                <p><strong>Objective:</strong> Develop and debug firmware for IoT and edge devices.</p>
-                <p><strong>Architecture:</strong> ESP32, ESP8266, Raspberry Pi Pico, MicroPython, Thonny IDE.</p>
-                <p><strong>Overview:</strong> Flashed and configured various microcontrollers for embedded applications, handling sensor integration and hardware-level debugging.</p>
-            </article>
-        </section>
-
-        <hr>
-
-        <!-- Category: Software Development -->
-        <section id="software-development">
-            <h2>Software Development</h2>
-
-            <article class="case-study">
-                <h3>Remote AI Command Gateway</h3>
-                <p><strong>Objective:</strong> Execute remote AI commands securely via mobile.</p>
-                <p><strong>Architecture:</strong> OpenClaw agent, Telegram Bot API, Gemini API.</p>
-                <p><strong>Overview:</strong> Deployed and troubleshot a local network gateway pairing a personal Telegram bot with LLM capabilities for remote task execution.</p>
+            <!-- Card 4: Simulation -->
+            <article class="card" data-category="simulation">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=800&q=80" alt="Thermal Engineering" class="card-img">
+                </div>
+                <div class="card-content">
+                    <span class="category-tag">Simulation & Modeling</span>
+                    <h3>Thermal Control Models</h3>
+                    <p>Developed comprehensive models to govern thermal dynamics, optimizing for rapid response and minimal overshoot in physical environments.</p>
+                    <div class="tech-stack">
+                        <span>PID Control</span>
+                        <span>MPC</span>
+                        <span>Simulink</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="view-btn">Read Case Study</a>
+                    </div>
+                </div>
             </article>
 
-            <article class="case-study">
-                <h3>Offline Cash Transaction Tracker</h3>
-                <p><strong>Objective:</strong> Create a private, serverless tool for financial tracking.</p>
-                <p><strong>Architecture:</strong> Single-file HTML/JS/CSS, LocalStorage, CSV parsing.</p>
-                <p><strong>Overview:</strong> Built a lightweight web application that persists data locally in the browser and visualizes spending via custom CSS-based donut charts.</p>
+            <!-- Card 5: Software -->
+            <article class="card" data-category="software">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80" alt="Software Code" class="card-img">
+                </div>
+                <div class="card-content">
+                    <span class="category-tag">Software Development</span>
+                    <h3>Remote AI Command Gateway</h3>
+                    <p>Deployed a local network gateway pairing a personal Telegram bot with LLM capabilities for secure, remote task execution.</p>
+                    <div class="tech-stack">
+                        <span>Python</span>
+                        <span>Telegram API</span>
+                        <span>Gemini API</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="view-btn">Read Case Study</a>
+                    </div>
+                </div>
             </article>
-        </section>
 
-    </main>
+            <!-- Card 6: ML -->
+            <article class="card" data-category="ml">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=800&q=80" alt="Clustering" class="card-img">
+                </div>
+                <div class="card-content">
+                    <span class="category-tag">Machine Learning</span>
+                    <h3>Temporal Feature Clustering</h3>
+                    <p>Built a data pipeline to clean time-related features from a medical dataset and automatically determine optimal cluster counts.</p>
+                    <div class="tech-stack">
+                        <span>pandas</span>
+                        <span>scikit-learn</span>
+                        <span>HDBSCAN</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="view-btn">Read Case Study</a>
+                    </div>
+                </div>
+            </article>
 
-    <footer>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <h2 style="margin-bottom: 1rem; color: var(--text-main);">Let's Connect</h2>
+        <p style="margin-bottom: 2rem;">I'm currently open for new opportunities and collaborations.</p>
+        <div style="display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2rem;">
+            <a href="mailto:your.email@example.com" class="btn btn-outline">Email Me</a>
+            <a href="https://linkedin.com/in/yourprofile" class="btn btn-outline" target="_blank">LinkedIn</a>
+            <a href="https://github.com/yourusername" class="btn btn-outline" target="_blank">GitHub</a>
+        </div>
         <p>&copy; 2026 [Your Name]. All rights reserved.</p>
     </footer>
 
+    <!-- Interactivity Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const cards = document.querySelectorAll('.card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active button
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    // Filter logic
+                    const filterValue = btn.getAttribute('data-filter');
+                    
+                    cards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'flex';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'scale(1)';
+                            }, 50);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'scale(0.9)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300); // match transition duration
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
