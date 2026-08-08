@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hasan Al-Asa'd | Mechatronics Engineer</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --bg-main: #0a0f16;
@@ -357,7 +358,6 @@
             margin: 2rem 0;
         }
 
-        /* Modal & Case Study Styles */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(10, 15, 22, 0.95);
@@ -377,10 +377,6 @@
             padding: 3rem; position: relative;
             box-shadow: 0 0 40px rgba(0, 240, 255, 0.1);
             transform: translateY(20px); transition: transform 0.3s ease;
-        }
-
-        .modal-overlay.active .modal-content {
-            transform: translateY(0);
         }
 
         .modal-close {
@@ -405,7 +401,6 @@
             padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0;
         }
 
-        /* Architecture Diagram CSS */
         .arch-diagram {
             display: flex; justify-content: space-between; align-items: stretch;
             margin: 2.5rem 0; padding: 2rem; background: var(--bg-card);
@@ -503,7 +498,6 @@
         </div>
 
         <div class="grid">
-            <!-- Machine Learning -->
             <article class="card" data-category="ml">
                 <div class="card-img-container">
                     <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80" alt="UAV Path Planning" class="card-img">
@@ -524,7 +518,25 @@
                 </div>
             </article>
 
-            <!-- Mechanical Design -->
+            <article class="card" data-category="robotics">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=800&q=80" alt="Simulation & Control" class="card-img">
+                </div>
+                <div class="card-content">
+                    <h3>Simulation & Control Systems</h3>
+                    <p>Dynamic system modeling and classical control case studies. Projects demonstrate capabilities in mathematical modeling, state-space representation, differential-equation-based simulation, and pole-placement feedback controller design.</p>
+                    <div class="tech-stack">
+                        <span>Dynamic Modeling</span>
+                        <span>State-Space</span>
+                        <span>Pole Placement</span>
+                        <span>Numerical Simulation</span>
+                    </div>
+                    <div class="card-footer" style="justify-content: center; border-top: none;">
+                        <button onclick="openModal('simulations-modal')" class="btn btn-outline" style="width: 100%; font-size: 0.8rem;">View Simulation Case Studies</button>
+                    </div>
+                </div>
+            </article>
+
             <article class="card" data-category="design">
                 <div class="card-img-container">
                     <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&q=80" alt="Medical Device Prototyping" class="card-img">
@@ -543,7 +555,6 @@
                 </div>
             </article>
 
-            <!-- Machine Learning 2 -->
             <article class="card" data-category="ml">
                 <div class="card-img-container">
                     <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=800&q=80" alt="Machine Vision" class="card-img">
@@ -563,7 +574,6 @@
                 </div>
             </article>
             
-            <!-- Embedded Systems -->
             <article class="card" data-category="embedded">
                 <div class="card-img-container">
                     <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Embedded Hardware" class="card-img">
@@ -601,7 +611,6 @@
         </p>
     </footer>
 
-    <!-- UAV Case Study Modal -->
     <div id="uav-modal" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal('uav-modal')">&times;</button>
@@ -630,9 +639,7 @@
                 <h3>2. Real-Time Experimental Platform</h3>
                 <p>The transition from simulation to real-world deployment presented significant software and hardware integration challenges. The laboratory's VICON motion-capture system was strictly Windows-based, while the UAV control stack required a Linux environment. I engineered a real-time bridging architecture to close the control loop.</p>
                 
-                <!-- CSS Architecture Diagram -->
                 <div class="arch-diagram">
-                    <!-- Windows Node -->
                     <div class="arch-node">
                         <div class="arch-node-title" style="color: var(--accent);">Windows OS (VICON & Python)</div>
                         <ul>
@@ -642,14 +649,12 @@
                         </ul>
                     </div>
 
-                    <!-- Socket Arrow -->
                     <div class="arch-arrow">
                         Wi-Fi TCP/IP Sockets
                         <span>&rarr;</span>
                         <div style="font-size: 0.65rem; margin-top: 5px;">Continuous Stream</div>
                     </div>
 
-                    <!-- Linux Node -->
                     <div class="arch-node linux">
                         <div class="arch-node-title" style="color: #f34b7d;">Linux Control System</div>
                         <ul>
@@ -659,13 +664,11 @@
                         </ul>
                     </div>
 
-                    <!-- Wi-Fi Arrow -->
                     <div class="arch-arrow">
                         UAV Protocol
                         <span>&rarr;</span>
                     </div>
 
-                    <!-- UAV Node -->
                     <div class="arch-node uav">
                         <div class="arch-node-title" style="color: #2ea043;">Parrot Anafi UAV</div>
                         <ul>
@@ -695,6 +698,69 @@
                     <span>Linux</span>
                     <span>Windows</span>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="simulations-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('simulations-modal')">&times;</button>
+            <div class="modal-body">
+                <h2>Simulation & Control Systems</h2>
+                <p style="font-family: 'Fira Code', monospace; color: var(--accent); margin-bottom: 2rem;">Dynamic Systems & Classical Control Studies</p>
+                
+                <div class="highlight-box">
+                    <p style="margin: 0;"><strong>Focus:</strong> These case studies demonstrate my capability to mathematically model dynamic systems, build differential-equation-based simulations, and design stable, closed-loop controllers using classical control theory.</p>
+                </div>
+
+                <!-- Project 1: Two-Mass System -->
+                <h3 style="border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">Project 1: Two-Mass Spring-Damper System Simulation</h3>
+                
+                <p><strong>Objective:</strong> Model, simulate, and analyze the dynamics of a coupled mechanical system.</p>
+                
+                <div style="margin: 2rem 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: #000;">
+                    <video width="100%" autoplay loop muted playsinline style="display: block;">
+                        <!-- PLACEHOLDER VIDEO - Replace the src with your actual video path, e.g., assets/videos/two_mass_spring.mp4 -->
+                        <source src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <h4>Engineering Process</h4>
+                <ul>
+                <div class="tech-stack" style="margin-bottom: 3rem;">
+                    <span>Dynamic System Modeling</span>
+                    <span>Numerical Simulation</span>
+                    <span>Coupled Mechanics</span>
+                </div>
+
+                <!-- Project 2: Inverted Pendulum -->
+                <h3 style="border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">Project 2: Inverted Pendulum with Pole Placement Control</h3>
+                
+                <p><strong>Objective:</strong> Design and simulate a closed-loop control system to stabilize a highly unstable nonlinear dynamic system.</p>
+                
+                <div style="margin: 2rem 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: #000;">
+                    <video width="100%" autoplay loop muted playsinline style="display: block;">
+                        <!-- PLACEHOLDER VIDEO - Replace the src with your actual video path, e.g., assets/videos/inverted_pendulum.mp4 -->
+                        <source src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <h4>Engineering Process</h4>
+                <ul>
+                    <li><strong>State-Space Modeling:</strong> Derived the non-linear dynamics of the inverted pendulum and linearized the system to create a state-space representation.</li>
+                    <li><strong>Controller Design:</strong> Designed a state-feedback controller using the <strong>Pole Placement</strong> technique to achieve desired closed-loop stability and transient response.</li>
+                    <li><strong>Closed-Loop Simulation:</strong> Simulated the controlled system to verify that the pendulum remains inverted despite initial disturbances, visualizing the stabilized response.</li>
+                </ul>
+
+                <div class="tech-stack">
+                    <span>Classical Control</span>
+                    <span>State-Space Modeling</span>
+                    <span>Pole Placement</span>
+                    <span>Closed-Loop Control</span>
+                </div>
+
             </div>
         </div>
     </div>
@@ -779,13 +845,6 @@
                 segments[i].x = segments[i-1].x - Math.cos(angle) * segmentLength;
                 segments[i].y = segments[i-1].y - Math.sin(angle) * segmentLength;
             }
-
-            // Anchor the base (last segment) to a fixed point if desired, 
-            // but letting it float feels more fluid for a background.
-            // If you want it anchored to bottom left:
-            // segments[numSegments-1].x = width * 0.1;
-            // segments[numSegments-1].y = height;
-            // Then forward reach back up... (omitted for floating "snake" effect which looks cooler)
 
             // Draw the links (metal arms)
             ctx.beginPath();
