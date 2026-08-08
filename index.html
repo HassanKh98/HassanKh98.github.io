@@ -357,6 +357,93 @@
             margin: 2rem 0;
         }
 
+        /* Modal & Case Study Styles */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 15, 22, 0.95);
+            z-index: 2000; display: none; overflow-y: auto;
+            padding: 2rem 5%; backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            display: block; opacity: 1;
+        }
+
+        .modal-content {
+            background: var(--bg-main); border: 1px solid var(--border);
+            border-radius: 8px; max-width: 1000px; margin: 2rem auto;
+            padding: 3rem; position: relative;
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.1);
+            transform: translateY(20px); transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute; top: 1.5rem; right: 1.5rem;
+            background: none; border: none; color: var(--text-muted);
+            font-size: 2.5rem; cursor: pointer; transition: var(--transition);
+            line-height: 1;
+        }
+
+        .modal-close:hover { color: var(--accent-secondary); text-shadow: 0 0 10px rgba(255, 0, 85, 0.5); }
+
+        .modal-body h2 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .modal-body h3 { font-size: 1.5rem; color: var(--accent); margin: 2rem 0 1rem 0; font-family: 'Fira Code', monospace; }
+        .modal-body h4 { font-size: 1.2rem; color: var(--text-main); margin: 1.5rem 0 0.5rem 0; }
+        .modal-body p, .modal-body li { color: var(--text-muted); margin-bottom: 1rem; font-size: 1.05rem; }
+        .modal-body ul { margin-left: 1.5rem; margin-bottom: 1.5rem; }
+        .modal-body li { margin-bottom: 0.5rem; }
+        .modal-body li strong { color: #c9d1d9; }
+
+        .highlight-box {
+            background: rgba(0, 240, 255, 0.05); border-left: 4px solid var(--accent);
+            padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0;
+        }
+
+        /* Architecture Diagram CSS */
+        .arch-diagram {
+            display: flex; justify-content: space-between; align-items: stretch;
+            margin: 2.5rem 0; padding: 2rem; background: var(--bg-card);
+            border-radius: 8px; border: 1px solid var(--border);
+            flex-wrap: wrap; gap: 1rem;
+        }
+        .arch-node {
+            flex: 1; min-width: 220px; padding: 1.5rem; background: #0a0f16;
+            border: 1px dashed var(--accent); border-radius: 8px;
+            display: flex; flex-direction: column;
+        }
+        .arch-node.linux { border-color: #f34b7d; }
+        .arch-node.uav { border-color: #2ea043; }
+        
+        .arch-node-title { 
+            color: var(--text-main); font-weight: bold; margin-bottom: 1rem; 
+            text-align: center; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+            font-family: 'Fira Code', monospace; font-size: 0.9rem;
+        }
+        .arch-node ul { list-style: none; margin: 0; padding: 0; font-size: 0.85rem; flex-grow: 1;}
+        .arch-node ul li::before { content: '▹'; color: var(--accent); display: inline-block; width: 1.2em; margin-left: -1.2em; }
+        .arch-node.linux ul li::before { color: #f34b7d; }
+        .arch-node.uav ul li::before { color: #2ea043; }
+        
+        .arch-arrow { 
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-muted); font-size: 1.5rem; font-family: 'Fira Code', monospace;
+            flex-direction: column; text-align: center; font-size: 0.75rem; gap: 0.5rem;
+        }
+        .arch-arrow span { font-size: 2rem; color: var(--accent); animation: pulse 2s infinite; }
+
+        @media (max-width: 900px) {
+            .arch-diagram { flex-direction: column; align-items: center; }
+            .arch-node { width: 100%; }
+            .arch-arrow { flex-direction: row; width: 100%; padding: 1rem 0; }
+            .arch-arrow span { transform: rotate(90deg); margin-left: 1rem; }
+        }
+
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -422,15 +509,17 @@
                     <img src="https://images.unsplash.com/photo-1579567761406-4684ee0c75b6?auto=format&fit=crop&w=800&q=80" alt="AI Path Planning" class="card-img">
                 </div>
                 <div class="card-content">
-                    <h3>3D UAV Path Planning</h3>
-                    <p>Developed AI-based 3D UAV path planning and autonomous navigation algorithms. Designed and trained reinforcement learning agents using PPO and custom simulation environments.</p>
+                    <h3>3D UAV Path Planning & Real-Time Control</h3>
+                    <p>A flagship research project bridging reinforcement learning and real-time physical control. Investigated PPO, DDPG, and DQN agents against classical APF methods in a custom 3D simulation, investigating various sensor input modalities. Then, successfully deployed the trained policies onto a Parrot Anafi drone using a complex, closed-loop VICON motion capture architecture.</p>
                     <div class="tech-stack">
-                        <span>Python</span>
-                        <span>Reinforcement Learning</span>
-                        <span>PPO</span>
+                        <span>RL (PPO/DDPG/DQN)</span>
+                        <span>Python/Linux/Windows</span>
+                        <span>VICON Tracking</span>
+                        <span>Parrot Anafi</span>
+                        <span>Wi-Fi Sockets</span>
                     </div>
-                    <div class="card-footer">
-                        <a href="#" class="view-btn">View Research</a>
+                    <div class="card-footer" style="justify-content: center; border-top: none;">
+                        <button onclick="openModal('uav-modal')" class="btn btn-outline" style="width: 100%; font-size: 0.8rem;">View Deep Dive Case Study</button>
                     </div>
                 </div>
             </article>
@@ -512,7 +601,132 @@
         </p>
     </footer>
 
+    <!-- UAV Case Study Modal -->
+    <div id="uav-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('uav-modal')">&times;</button>
+            <div class="modal-body">
+                <h2>3D UAV Path Planning: Simulation to Real-World Control</h2>
+                <p style="font-family: 'Fira Code', monospace; color: var(--accent); margin-bottom: 2rem;">Research & Systems Engineering Flagship</p>
+                
+                <div class="highlight-box">
+                    <p style="margin: 0;"><strong>Primary Research Contribution:</strong> A comparative investigation of reinforcement-learning algorithms (PPO, DDPG, DQN) and environmental input representations for autonomous 3D UAV path planning, successfully integrated into a real-time physical UAV control framework.</p>
+                </div>
+
+                <h3>1. Simulation & Research Environment</h3>
+                <p>Before touching hardware, I built a custom 3D UAV simulation environment from scratch. This was not a pre-packaged RL tutorial; the environment was specifically engineered to evaluate different approaches to autonomous 3D path planning.</p>
+                <ul>
+                    <li><strong>Custom 3D Workspace:</strong> Programmed UAV kinematics, configurable obstacles, position/orientation tracking, and precise collision/distance calculations.</li>
+                    <li><strong>Algorithm Comparison:</strong> Implemented and trained agents using <strong>PPO, DDPG, and DQN</strong>, benchmarking their navigation performance against classical <strong>Artificial Potential Field (APF)</strong> approaches.</li>
+                    <li><strong>Investigation of Agent Inputs:</strong> A major focus of the research was analyzing how different environmental perceptions affected path-planning success. I experimented with and compared:
+                        <ul>
+                            <li>Depth-camera-based observations.</li>
+                            <li>APF-based sensor representations.</li>
+                            <li>Direct distance and directional vectors to the closest obstacles.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>2. Real-Time Experimental Platform</h3>
+                <p>The transition from simulation to real-world deployment presented significant software and hardware integration challenges. The laboratory's VICON motion-capture system was strictly Windows-based, while the UAV control stack required a Linux environment. I engineered a real-time bridging architecture to close the control loop.</p>
+                
+                <!-- CSS Architecture Diagram -->
+                <div class="arch-diagram">
+                    <!-- Windows Node -->
+                    <div class="arch-node">
+                        <div class="arch-node-title" style="color: var(--accent);">Windows OS (VICON & Python)</div>
+                        <ul>
+                            <li style="margin-bottom: 10px;">Receive UAV & obstacle Pose data from VICON cameras.</li>
+                            <li style="margin-bottom: 10px;">Python GUI for real-time data visualization.</li>
+                            <li>Record and log experimental data locally.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Socket Arrow -->
+                    <div class="arch-arrow">
+                        Wi-Fi TCP/IP Sockets
+                        <span>&rarr;</span>
+                        <div style="font-size: 0.65rem; margin-top: 5px;">Continuous Stream</div>
+                    </div>
+
+                    <!-- Linux Node -->
+                    <div class="arch-node linux">
+                        <div class="arch-node-title" style="color: #f34b7d;">Linux Control System</div>
+                        <ul>
+                            <li style="margin-bottom: 10px;">Receive VICON telemetry data.</li>
+                            <li style="margin-bottom: 10px;">Feed state data into the trained RL Policy (e.g., PPO model).</li>
+                            <li>Generate optimal velocity/attitude control commands.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Wi-Fi Arrow -->
+                    <div class="arch-arrow">
+                        UAV Protocol
+                        <span>&rarr;</span>
+                    </div>
+
+                    <!-- UAV Node -->
+                    <div class="arch-node uav">
+                        <div class="arch-node-title" style="color: #2ea043;">Parrot Anafi UAV</div>
+                        <ul>
+                            <li style="margin-bottom: 10px;">Execute physical flight maneuvers.</li>
+                            <li style="margin-bottom: 10px;">Closed-loop system repeats seamlessly.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>3. Physical UAV & Safety Systems</h3>
+                <p>Running untested RL policies on expensive physical hardware is inherently risky. Safety was not an afterthought; it was deeply incorporated into the real-time control framework.</p>
+                <ul>
+                    <li><strong>Continuous Monitoring:</strong> The Python application continuously monitored the UAV state against the defined physical boundaries of the VICON cage.</li>
+                    <li><strong>Pre-emptive Triggering:</strong> Programmed safety logic capable of calculating impending collisions and overriding the RL policy commands.</li>
+                    <li><strong>Emergency Landings:</strong> Developed both manual fail-safes and an automated safety landing protocol that safely brought the Parrot Anafi to the ground before a crash could occur.</li>
+                </ul>
+
+                <div class="tech-stack" style="margin-top: 2rem;">
+                    <span>Reinforcement Learning</span>
+                    <span>3D Path Planning</span>
+                    <span>UAV Simulation</span>
+                    <span>Robot Vision</span>
+                    <span>Motion Capture (VICON)</span>
+                    <span>Real-Time Systems</span>
+                    <span>Network Communication</span>
+                    <span>Python</span>
+                    <span>Linux</span>
+                    <span>Windows</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Modal Logic
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            modal.style.display = 'block';
+            // Small delay to allow display:block to apply before adding opacity class for transition
+            setTimeout(() => {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }, 10);
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.remove('active');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 300); // Match CSS transition duration
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                closeModal(event.target.id);
+            }
+        }
+
         const canvas = document.getElementById('kinematics-canvas');
         const ctx = canvas.getContext('2d');
         
